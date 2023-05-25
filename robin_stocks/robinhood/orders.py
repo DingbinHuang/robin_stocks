@@ -346,7 +346,7 @@ def order_buy_fractional_by_quantity(symbol, quantity, account_number=None, time
     """ 
     #return order(symbol, quantity, "buy", account_number, None, None, timeInForce, extendedHours, jsonify)
     ### BEGIN: Patch for new Robinhood Order Form (DingbinHuang 5/25/2023)
-
+    price = next(iter(get_latest_price(symbol, 'ask_price', extendedHours)), 0.00)
     payload = {
         'account': load_account_profile(account_number=account_number, info='url'),
         'instrument': get_instruments_by_symbols(symbol, info='url')[0],
