@@ -581,13 +581,12 @@ def order_sell_fractional_by_quantity(symbol, quantity, account_number=None, tim
 
     """ 
     #return order(symbol, quantity, "sell", account_number, None, None, timeInForce, extendedHours, jsonify)
-    ### BEGIN: Patch for new Robinhood Order Form (DingbinHuang 5/25/2023)
+    ### BEGIN: Patch for new Robinhood Order Form (GuitarGuyChrisB 6/15/2023)
     price = next(iter(get_latest_price(symbol, 'ask_price', extendedHours)), 0.00)
     payload = {
         'account': load_account_profile(account_number=account_number, info='url'),
         'instrument': get_instruments_by_symbols(symbol, info='url')[0],
         'order_form_version': "2",
-        'preset_percent_limit': "0.05",
         'symbol': symbol,
         'price': price,
         'quantity': quantity,
@@ -603,7 +602,7 @@ def order_sell_fractional_by_quantity(symbol, quantity, account_number=None, tim
     data = request_post(url, payload, json=True, jsonify_data=jsonify)
 
     return (data)
-    ### END: Patch for new Robinhood Order Form (DingbinHuang 6/15/2023)
+    ### END: Patch for new Robinhood Order Form (GuitarGuyChrisB 6/15/2023)
 
 @login_required
 def order_sell_fractional_by_price(symbol, amountInDollars, account_number=None, timeInForce='gfd', extendedHours=False, jsonify=True):
