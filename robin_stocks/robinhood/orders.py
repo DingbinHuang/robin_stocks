@@ -592,7 +592,7 @@ def order_sell_fractional_by_quantity(symbol, quantity, account_number=None, tim
         'price': price,
         'quantity': quantity,
         'ref_id': str(uuid4()),
-        'type': "market",
+        'type': "limit",
         'time_in_force': timeInForce,
         'trigger': "immediate",
         'side': "sell",
